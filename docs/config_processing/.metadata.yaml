@@ -1,0 +1,75 @@
+# Copy this file into your data folder and edit as needed.
+# Remove sections you don't need. Only include what differs from defaults.
+# For validated, specific configs: docs/config_processing/REFERENCE_CONFIGS.md
+
+# ── Data state ────────────────────────────────────────────────────────────────
+processed: false                     # false → apply conversions; true → skip
+
+conversions:
+  psi_to_kpa: true                   # multiply Pressure by 6.89476
+  pot_percent_scale_factor: 1.13     # multiply Contraction by 1.13 
+
+# ── Analysis mode ─────────────────────────────────────────────────────────────
+analysis_mode: "time"                # "time" or "cycle" (default when absent: "cycle")
+
+time_window:
+  window_size_seconds: 10            # period length in seconds
+  active_start: 0                    # optional: seconds into period to start (default 0)
+  active_end: 6                      # optional: seconds into period to stop (default full window)
+
+# ── Active loop extraction ────────────────────────────────────────────────────
+# Option A: skip detection, use the full time window as-is
+active_loop:
+  skip: true
+
+# Option B: custom detection (pipeline defaults: active_len=6, delta_p=3.44738, backup_time=0.5)
+# active_loop:
+#   active_len: 6.0                  # seconds of high-pressure window to capture
+#   delta_p: 3.44738                 # pressure rise threshold above baseline
+#   backup_time: 0.5                 # pre-rise lead time (s)
+
+# ── Derived metrics ───────────────────────────────────────────────────────────
+# Adds filtered signals + per-cycle derivatives to activeDat. Time mode only.
+derived_metrics: false
+
+derived_metrics_config:
+  smooth_window: 5                   # samples; must be odd for savgol (auto-bumped if even)
+                                     # also used as window for rolling_mean, median, wiener,
+                                     # hampel, and as ewm span for exponential
+  smooth_method: "savgol"      # "rolling_mean" | "savgol" | "butterworth" | "bessel"
+                                     # "median" | "wiener" | "complementary"
+                                     # "hampel" | "wavelet" | "tv" | "kalman"
+                                     # "loess": DEPRECATED, do not use on raw PAM signals
+  # ── butterworth / bessel ──────────────────────────────────────────────────────
+  # butterworth_cutoff_hz: 10.0      # -3dB cutoff (Hz); butterworth only
+  # butterworth_order: 4             # filter order; butterworth only
+  # bessel_cutoff_hz: 10.0           # -3dB cutoff (Hz); bessel only (norm='mag')
+  # bessel_order: 4                  # filter order; bessel only
+  # ── complementary ─────────────────────────────────────────────────────────────
+  # complementary_alpha: 0.3         # blend weight [0,1]: 1=passthrough, 0=max smooth
+  # ── hampel ────────────────────────────────────────────────────────────────────
+  # hampel_threshold: 3.0            # outlier threshold in MAD units (3 ≈ 3σ Gaussian)
+  # ── wavelet ───────────────────────────────────────────────────────────────────
+  # wavelet_name: "db4"              # PyWavelets wavelet name
+  # wavelet_level: 3                 # decomposition levels (default: auto)
+  # wavelet_threshold_mode: "soft"   # "soft" or "hard"
+  # ── tv (total variation) ──────────────────────────────────────────────────────
+  # tv_weight: 0.1                   # regularization strength; higher = more smoothing
+  # ── loess [DEPRECATED - DO NOT RECOMMEND] ────────────────────────────────────
+  # LOESS distorts PAM hysteresis loop geometry when applied to raw pressure/contraction signals.
+  # It is retained in the codebase for post-metric use only (e.g. centroid drift timeseries).
+  # Use savgol, wavelet, or tv for raw signal smoothing instead.
+  # loess_frac: 0.1                  # fraction of data per local fit; smaller = more local
+  # ── kalman ────────────────────────────────────────────────────────────────────
+  # kalman_process_noise: 0.001      # Q: variance of true signal's sample-to-sample change
+                                     #    smaller Q → slower dynamics assumed → more smoothing
+  # kalman_measurement_noise: 0.1    # R: sensor measurement variance
+                                     #    larger R → distrust sensor → more smoothing
+                                     #    steady-state gain K = P∞/(P∞+R), P∞=(Q+√(Q²+4QR))/2
+
+# ── User metrics ──────────────────────────────────────────────────────────────
+# Runs user_metrics.py on each cycle. Add custom per-cycle columns there.
+new_metrics: false
+
+new_metrics_config:
+  # my_param: 0.7                    # any key/value your user_metrics.py reads via config.get()

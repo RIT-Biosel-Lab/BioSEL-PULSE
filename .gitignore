@@ -1,0 +1,168 @@
+# ==========================================
+# CUSTOM IGNORE 
+# ==========================================
+.vscode/
+# Hardware Folder
+# Pipeline output: run_analysis.py writes here by default (relative to where it is launched)
+core/analysis_results/
+analysis_results/ 
+
+
+# @@@@@@@@@@@ IMMUTABLE BELOW @@@@@@@@@@@
+
+# =========================================
+# Operating Systems
+# ==========================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.AppleDB
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.Trashes
+VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+Icon
+
+# Linux (generic, Mint/GNOME/Cinnamon, CachyOS/Arch/KDE)
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+.kdev4/
+*.kate-swp
+*.part
+
+# ==========================================
+# IDEs & Editors
+# ==========================================
+
+# VS Code / VSCodium
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+.history/
+*.code-workspace
+.vscodium/
+
+# ==========================================
+# Python (uv)
+# ==========================================
+
+# Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# uv
+.uv/
+
+# Testing & linting caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+*.cover
+.hypothesis/
+
+# Jupyter
+*.ipynb_checkpoints
+.jupyter/
+
+# ==========================================
+# LaTeX
+# ==========================================
+
+# Core auxiliary files
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+
+# Build system
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
+# Cross-references & indices
+*.idx
+*.ind
+*.ilg
+*.bcf
+*.run.xml
+
+# Glossaries
+*.glo
+*.gls
+*.glg
+*.acn
+*.acr
+*.alg
+
+# Beamer presentations
+*.nav
+*.snm
+*.vrb
+
+# Misc output formats
+*.dvi
+*.xdv
+*.thm
+*.lol
+*.maf
+*.mtc*
+*.listing
+
+# minted code listings
+_minted-*/
+*.pyg
+
+# Compiled output (comment out if committing finalized PDFs)
+*.pdf

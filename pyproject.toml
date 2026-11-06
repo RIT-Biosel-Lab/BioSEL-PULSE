@@ -1,0 +1,42 @@
+[project]
+name = "biosel-pam-release"
+version = "1.0.0"
+description = "BioSEL McKibben PAM release: the BioSEL-PULSE analysis pipeline and the figure notebooks, in one environment"
+requires-python = ">=3.11"
+authors = [
+    {name = "Bryan Lukehart-Yun", email = "wwy6929@rit.edu"}
+]
+
+# One environment for the whole package. numpy, pandas, and scikit-learn are the
+# exact versions that built the provided all_results.pkl, so it unpickles without
+# version warnings whether you are regenerating it or only plotting it.
+dependencies = [
+    "numpy==2.4.4",
+    "pandas==3.0.2",
+    "scikit-learn==1.8.0",
+    "scipy>=1.12",
+    "matplotlib>=3.8",
+    "psutil>=5.9",
+    "pyyaml>=6.0",
+    "PyWavelets>=1.4",
+    "openpyxl>=3.0",
+    "jupyter>=1.0",
+    "ipython>=8.0",
+    "ipywidgets>=8.0",
+    "streamlit>=1.40",
+]
+
+[project.optional-dependencies]
+loess = ["statsmodels>=0.14"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["core"]
+
+[tool.uv]
+package = false
