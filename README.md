@@ -1,6 +1,6 @@
 # BioSEL PAM Unified Loading, Synthesis & Extraction (BioSEL-PULSE )
 
-> Author's Note: As stated, the code here is frozen from the time it was attached to the Zenodo upload. Please refer to Zenodo, GitHub, or the root documentations. The docs/ however contains good sources of information. .
+> Author's Note: As stated, the code here is added in here from the time it was attached to the Zenodo upload. Please refer to Zenodo, GitHub Issues or this for recent updates, or the root documentations. The docs/ however contains good sources of information..
 
 Python analysis pipeline for open-loop McKibben Pneumatic Artificial Muscle (PAM) data, accompanying the Bioinspired Systems Engineering Lab (BioSEL) _Data in Brief_ publication. The primary deliverable is the pre-built `.pkl` in the Zenodo release (along with csv files); load it and start analyzing or use it for your research. It serializes the original N×4 CSV values (time, pressure, contraction, cycle) per dataset untouched, plus filtered and derived signal columns (smoothed pressure/contraction, velocity, acceleration) computed with Savitzky-Golay. Metrics dating back to Bryan Lukehart-Yun's M.S. thesis and upcoming publications (hysteresis loop area, centroid drift, cycle-to-cycle correlation, modal distribution) are included on top of the raw data. Researchers can regenerate from the raw CSVs and use any of 11 smoothing methods, but that is entirely optional and left to the researcher's needs.
 
@@ -256,3 +256,12 @@ Requires Python 3.11 or newer (pinned as `requires-python = ">=3.11"` in the roo
 - [`docs/02_LIMITATIONS.md`](docs/02_LIMITATIONS.md) - Known issues and edge cases
 - [`docs/03_PKL_OUTPUT_REFERENCE.md`](docs/03_PKL_OUTPUT_REFERENCE.md) - Full PKL key reference
 - [`docs/config_processing/REFERENCE_CONFIGS.md`](docs/config_processing/REFERENCE_CONFIGS.md) - Validated processing configs
+
+--- 
+
+## Agentic AI such as Anthropic Claude, ChatGPT Codex, Deepseek, and others
+
+
+The authors discloses that Agentic AI tools, specifically Claude and Qwen local models, were used to help write and review the BioSEL-PULSE pipeline code to ensure the file paths and commands made sense. Every AI-assisted contribution was read and verified line by line by the lead author before release, under a "trust but verify" process. The companion Data in Brief article states the same disclosure. If any part of the pipeline is unclear, you are welcome to point your own AI assistant at it. 
+
+A `CLAUDE.md` and `AGENTS.md` is included for completeness to help out with the BioSEL-PULSE and also with the Zenodo release to help out as needed. They are contained here, but frozen. BioSEL-FORGE will have the most up to date version as needed. 
